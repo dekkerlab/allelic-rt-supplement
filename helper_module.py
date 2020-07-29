@@ -4,6 +4,36 @@
 import numpy as np
 import pandas as pd
 
+from matplotlib.path import Path
+import matplotlib.patches as patches
+
+
+# creating a custom "path" to use in a modified
+# bad-plot:
+verts = [
+   (0., 0.),  # left, bottom
+   (0., 1.),  # left, top
+   (4., 1.),  # right, top
+   (4., 0.),  # right, bottom
+   (0., 0.),  # ignored
+]
+verts = [
+   (-3, -1),  # left, bottom
+   (-3, 1),  # left, top
+   (3, 1),  # right, top
+   (3, -1),  # right, bottom
+   (-3, -1),  # ignored
+]
+codes = [
+    Path.MOVETO,
+    Path.LINETO,
+    Path.LINETO,
+    Path.LINETO,
+    Path.CLOSEPOLY,
+]
+bar_path = Path(verts, codes)
+
+
 to_uscs = lambda treg: f"{treg[0]}:{treg[1]}-{treg[2]}"
 
 def fillcolor_compartment_style(ycmp, ax, bin_range=None, lw=0.5, level=.0, color_less="blue", color_more="red"):
