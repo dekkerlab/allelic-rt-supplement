@@ -1,3 +1,6 @@
+# ignore figures
+*.pdf
+
 # fasta files
 *.fa
 
